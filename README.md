@@ -1,3 +1,5 @@
-1) $ git clone  
+To run the project:
 
-2) Go to public/index.html then go to browser
+1) $ git clone https://github.com/maardan/purchase-app.git
+
+2) Go to purchase-app/public/index.html then go to browser
