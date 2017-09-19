@@ -1,6 +1,8 @@
 import React from 'react';
 import {Row, Col, FormGroup, ControlLabel, FormControl, Button, Glyphicon} from 'react-bootstrap';
-
+/*
+* A ProductRow is created for each new product added, each has its own selection controls
+*/
 const ProductRow = (props) => {
 
 	return (

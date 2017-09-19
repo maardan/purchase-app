@@ -8,8 +8,10 @@ class ContactBilling extends Component {
 	render() {
 
 		const props = this.props;
-		const {shoppingCart} = props;
-		const cartSummary = ((shoppingCart.length > 0) && (shoppingCart[0].product.length > 0)) ? <ShoppingCartSummary shoppingCart={shoppingCart} /> : null;
+		const {shoppingCart, deploymentKey} = props;
+
+		// only show the Shopping Cart summary if items are present
+		const cartSummary = ((shoppingCart.length > 0) && (shoppingCart[0].product.length > 0)) ? <ShoppingCartSummary shoppingCart={shoppingCart} deploymentKey={deploymentKey} /> : null;
 
 		return (
 			<div>
@@ -21,7 +23,8 @@ class ContactBilling extends Component {
 
 const mapStateToProps = (state) => {
 	return {
-		shoppingCart: state.purchase.shoppingCart
+		shoppingCart: state.purchase.shoppingCart,
+		deploymentKey: state.purchase.deploymentKey
 	};
 };
 

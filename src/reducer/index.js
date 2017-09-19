@@ -41,7 +41,6 @@ const purchase = (state = initialState, action) => {
 			});
 		}
 		case 'UPDATE_SHOPPING_CART_PRODUCT' : {
-
 			return Object.assign({}, state, {
 				shoppingCart : state.shoppingCart.map((item, i) => {
 
@@ -53,7 +52,6 @@ const purchase = (state = initialState, action) => {
 			});
 		} 
 		case 'UPDATE_SHOPPING_CART_DEPLOYMENT' : {
-
 			return Object.assign({}, state, {
 				shoppingCart : state.shoppingCart.map((item, i) => {
 
@@ -65,7 +63,6 @@ const purchase = (state = initialState, action) => {
 			});
 		} 
 		case 'UPDATE_SHOPPING_CART_MODEL' : {
-
 			return Object.assign({}, state, {
 				shoppingCart : state.shoppingCart.map((item, i) => {
 
@@ -77,7 +74,6 @@ const purchase = (state = initialState, action) => {
 			});
 		} 
 		case 'UPDATE_DEPLOYMENT_OPTIONS' : {
-
 			return Object.assign({}, state, {
 				shoppingCart : state.shoppingCart.map((item, i) => {
 
@@ -89,7 +85,6 @@ const purchase = (state = initialState, action) => {
 			});
 		} 
 		case 'UPDATE_MODEL_OPTIONS' : {
-
 			return Object.assign({}, state, {
 				shoppingCart : state.shoppingCart.map((item, i) => {
 
@@ -101,7 +96,6 @@ const purchase = (state = initialState, action) => {
 			});
 		} 
 		case 'UPDATE_MODELS_PER_PRODUCT' : {
-
 			return Object.assign({}, state, {
 				shoppingCart : state.shoppingCart.map((item, i) => {
 
@@ -113,7 +107,6 @@ const purchase = (state = initialState, action) => {
 			});
 		} 		
 		case 'SET_QUANTITY' : {
-
 			return Object.assign({}, state, {
 				shoppingCart : state.shoppingCart.map((item, i) => {
 
@@ -125,7 +118,6 @@ const purchase = (state = initialState, action) => {
 			});
 		} 	
 		case 'DELETE_PRODUCT' : {
-
 			return Object.assign({}, state, { shoppingCart: state.shoppingCart.filter((item, i) =>  i !== action.cartIndex) });
 		} 
 		default : return state;

@@ -22,7 +22,7 @@ const ShoppingCartSummary = (props) => {
 							<tr key={i}>
 								<td>{i + 1}</td>
 								<td>{item.product}</td>
-								<td>{item.deployment}</td>
+								<td>{props.deploymentKey[item.deployment]}</td>
 								<td>{item.model}</td>
 								<td>{item.quantity}</td>
 								<td>{item.price * item.quantity}</td>

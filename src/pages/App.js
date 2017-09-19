@@ -8,6 +8,9 @@ import Description from '../partials/Description';
 import Tabs from '../partials/Tabs';
 import './App.css';
 
+/**
+* App is starting point (top node) of all components
+*/	
 class App extends Component {
 
 	// Fetch and set the necessary data so no form data is hardcoded in
@@ -18,13 +21,13 @@ class App extends Component {
 
 	render() {
 
-		const props = this.props;
-		const currTabView = (props.tab === 'SELECT_PRODUCTS' ? <SelectProducts /> : <ContactBilling />);
+		const {setTab, tab} = this.props;
+		const currTabView = (tab === 'SELECT_PRODUCTS' ? <SelectProducts /> : <ContactBilling />);
 
 		return (
 			<Grid>
 				<Description />
-				<Tabs currTab={props.tab} tabClick={(tab) => props.setTab(tab)} />
+				<Tabs currTab={tab} tabClick={(tab) => setTab(tab)} />
 				<hr/>
 				{currTabView}
 			</Grid>);

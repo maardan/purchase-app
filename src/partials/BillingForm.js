@@ -5,7 +5,7 @@ const BillingForm = (props) => {
 
 	return (
 		<Row>
-			<Col xs={4} xsOffset={4} sm={4} smOffset={4} md={4} mdOffset={4} lg={4} lgOffset={4}>
+			<Col xs={8} xsOffset={2} sm={4} smOffset={4} md={4} mdOffset={4} lg={4} lgOffset={4}>
 				<Form horizontal>
 					<FormGroup controlId="formHorizontalEmail">
 						<ControlLabel>Full Name</ControlLabel>

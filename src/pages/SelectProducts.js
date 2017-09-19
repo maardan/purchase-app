@@ -9,7 +9,8 @@ class SelectProducts extends Component {
 	handleProductSelect(e, cartIndex) {
 
 		const {updateDeploymentOptions, updateModelOptions, updateModelsPerProduct, updateCartProduct, updateCartDeployment, updateCartModel, productsData} = this.props;
-		const i = e.target.selectedIndex - 1;
+		// i is the index of the selected option, it's subtracted by 1 to disregard the default "select" option
+		const i = e.target.selectedIndex - 1; 
 		const productName = e.target.value;
 
 		// reset Deployment & Model options to "select" everytime a Product is selected
@@ -62,6 +63,7 @@ class SelectProducts extends Component {
 		}
 	}
 
+	// validation check for quantity input
 	handleQuantityChange(value, cartIndex) {
 		const {handleQuantity} = this.props;
 
@@ -77,7 +79,7 @@ class SelectProducts extends Component {
 		}
 	}
 
-	// This is to handle if/when user inputs nothing into the quantity field, to automatically put 1 instead so we don't have a calculation with NaN
+	// if/when user inputs nothing into the quantity field, automatically input 1 instead so we don't have a calculation with NaN
 	validateQuantity(value, cartIndex) {
 		const {handleQuantity} = this.props;
 
@@ -88,6 +90,8 @@ class SelectProducts extends Component {
 
 	render() {
 		const {addAnotherProduct, shoppingCart, deploymentKey, productsData, handleQuantity, deleteProduct, setTab} = this.props;
+
+		// get the sum of all (prices * quantity), if nothing has been added yet, return 0.00
 		const totalPrice = (shoppingCart[0].price ? shoppingCart.reduce((sum, item) => (sum + (item.price * item.quantity)), 0) : '0.00');
 
 		/**
