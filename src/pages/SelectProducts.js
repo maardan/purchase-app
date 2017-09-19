@@ -87,7 +87,7 @@ class SelectProducts extends Component {
 	}
 
 	render() {
-		const {addAnotherProduct, shoppingCart, deploymentKey, productsData, handleQuantity, deleteProduct} = this.props;
+		const {addAnotherProduct, shoppingCart, deploymentKey, productsData, handleQuantity, deleteProduct, setTab} = this.props;
 		const totalPrice = (shoppingCart[0].price ? shoppingCart.reduce((sum, item) => (sum + (item.price * item.quantity)), 0) : '0.00');
 
 		/**
