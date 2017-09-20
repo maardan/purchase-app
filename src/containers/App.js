@@ -1,11 +1,12 @@
 import React, { Component } from 'react';
 import {connect} from 'react-redux';
-import {Grid} from 'react-bootstrap';
+import {Grid, Carousel} from 'react-bootstrap';
 import {fetchData, setTab} from '../actions';
 import SelectProducts from './SelectProducts';
 import ContactBilling from './ContactBilling';
 import Description from '../partials/Description';
 import Tabs from '../partials/Tabs';
+import LowerNav from './LowerNav';
 import './App.css';
 
 /**
@@ -20,30 +21,44 @@ class App extends Component {
 	}
 
 	render() {
-
-		const {setTab, tab} = this.props;
-		const currTabView = (tab === 'SELECT_PRODUCTS' ? <SelectProducts /> : <ContactBilling />);
+		const {setTab, tabIndex} = this.props;
 
 		return (
 			<Grid>
+
 				<Description />
-				<Tabs currTab={tab} tabClick={(tab) => setTab(tab)} />
+
+				<Tabs currTab={tabIndex} tabClick={(tabIndex) => setTab(tabIndex)} />
+
 				<hr/>
-				{currTabView}
+
+				<Carousel activeIndex={tabIndex} controls={false} direction={null} indicators={false}>
+					<Carousel.Item>
+						<SelectProducts />
+					</Carousel.Item>
+					<Carousel.Item>
+						<ContactBilling />
+					</Carousel.Item>
+				</Carousel>
+
+				<hr/>
+
+				<LowerNav currTab={tabIndex} tabClick={(tabIndex) => setTab(tabIndex)} />
+
 			</Grid>);
 	}
 }
 
 const mapStateToProps = (state) => {
 	return {
-		tab: state.purchase.tab
+		tabIndex: state.purchase.tabIndex
 	};
 };
 
 const mapDispatchToProps = (dispatch) => {
 	return {
 		fetchData: () => dispatch(fetchData()),
-		setTab: (tab) => dispatch(setTab(tab))
+		setTab: (tabIndex) => dispatch(setTab(tabIndex))
 	};
 };
 

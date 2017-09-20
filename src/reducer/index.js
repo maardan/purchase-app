@@ -3,13 +3,13 @@ import {combineReducers} from 'redux';
 const initialState = {
 	deploymentKey: {},
 	productsData: [],
-	tab: 'SELECT_PRODUCTS',
+	tabIndex: 0,
 	shoppingCart: [{
 		product: '',
 		deployment: '',
 		model: '',
 		quantity: 1,
-		price: '',
+		price: 0,
 		deploymentOptions: [],
 		modelOptions: [],
 		modelsPerProduct: []
@@ -24,7 +24,7 @@ const purchase = (state = initialState, action) => {
 			return Object.assign({}, state, {deploymentKey: action.deploymentKey, productsData: action.productsData});
 		}
 		case 'SET_TAB' : { 
-			return Object.assign({}, state, {tab: action.tab});
+			return Object.assign({}, state, {tabIndex: action.tabIndex});
 		}
 		case 'ADD_NEW_PRODUCT' : { 
 			return Object.assign({}, state, {
@@ -33,7 +33,7 @@ const purchase = (state = initialState, action) => {
 					deployment: '',
 					model: '',
 					quantity: 1,
-					price: '',
+					price: 0,
 					deploymentOptions: [],
 					modelOptions: [],
 					modelsPerProduct: []
@@ -47,7 +47,7 @@ const purchase = (state = initialState, action) => {
 					if (i !== action.cartIndex) {
 						return item;
 					}
-					return Object.assign({}, item, { product : action.product });
+					return Object.assign({}, item, { product: action.product });
 				})
 			});
 		} 
@@ -58,7 +58,7 @@ const purchase = (state = initialState, action) => {
 					if (i !== action.cartIndex) {
 						return item;
 					}
-					return Object.assign({}, item, { deployment : action.deployment });
+					return Object.assign({}, item, { deployment: action.deployment });
 				})
 			});
 		} 
@@ -69,7 +69,7 @@ const purchase = (state = initialState, action) => {
 					if (i !== action.cartIndex) {
 						return item;
 					}
-					return Object.assign({}, item, { model : action.model, price: action.price });
+					return Object.assign({}, item, { model: action.model, price: action.price });
 				})
 			});
 		} 
@@ -80,7 +80,7 @@ const purchase = (state = initialState, action) => {
 					if (i !== action.cartIndex) {
 						return item;
 					}
-					return Object.assign({}, item, { deploymentOptions : action.deploymentOptions });
+					return Object.assign({}, item, { deploymentOptions: action.deploymentOptions });
 				})
 			});
 		} 
@@ -91,7 +91,7 @@ const purchase = (state = initialState, action) => {
 					if (i !== action.cartIndex) {
 						return item;
 					}
-					return Object.assign({}, item, { modelOptions : action.modelOptions });
+					return Object.assign({}, item, { modelOptions: action.modelOptions });
 				})
 			});
 		} 
@@ -102,7 +102,7 @@ const purchase = (state = initialState, action) => {
 					if (i !== action.cartIndex) {
 						return item;
 					}
-					return Object.assign({}, item, { modelsPerProduct : action.modelsPerProduct });
+					return Object.assign({}, item, { modelsPerProduct: action.modelsPerProduct });
 				})
 			});
 		} 		
@@ -113,7 +113,7 @@ const purchase = (state = initialState, action) => {
 					if (i !== action.cartIndex) {
 						return item;
 					}
-					return Object.assign({}, item, { quantity : action.quantity });
+					return Object.assign({}, item, { quantity: action.quantity });
 				})
 			});
 		} 	

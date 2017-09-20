@@ -3,7 +3,7 @@ import ReactDOM from 'react-dom';
 import {createStore} from 'redux';
 import {Provider} from 'react-redux';
 import rootReducer from './reducer';
-import App from './pages/App';
+import App from './containers/App';
 import './index.css';
 
 const initialState = window.__PRELOADED_STATE__;

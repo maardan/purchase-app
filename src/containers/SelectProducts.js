@@ -1,8 +1,8 @@
 import React, { Component } from 'react';
 import {connect} from 'react-redux';
-import {setTab, addNewProduct, updateCartProduct, updateCartDeployment, updateCartModel, updateDeploymentOptions, updateModelOptions, updateModelsPerProduct, handleQuantity, deleteProduct} from '../actions';
+import {addNewProduct, updateCartProduct, updateCartDeployment, updateCartModel, updateDeploymentOptions, updateModelOptions, updateModelsPerProduct, handleQuantity, deleteProduct} from '../actions';
 import ProductRow from '../partials/ProductRow';
-import {Button, Glyphicon, ControlLabel} from 'react-bootstrap';
+import {Glyphicon} from 'react-bootstrap';
 
 class SelectProducts extends Component {
 
@@ -13,7 +13,9 @@ class SelectProducts extends Component {
 		const i = e.target.selectedIndex - 1; 
 		const productName = e.target.value;
 
-		// reset Deployment & Model options to "select" everytime a Product is selected
+		// reset everytime a new Product or default "select" is option is clicked
+		updateCartDeployment(cartIndex, '');		
+		updateCartModel(cartIndex, '', '');			
 		updateDeploymentOptions(cartIndex, []);
 		updateModelOptions(cartIndex, []);
 		updateModelsPerProduct(cartIndex, []);
@@ -24,15 +26,13 @@ class SelectProducts extends Component {
 			const modelsPerProduct = productsData[i].product_models;
 			const deploymentOptions = [...new Set(modelsPerProduct.map(item => item.deployment_id))];
 
+			// update Shopping Cart
+			updateCartProduct(cartIndex, productName);	
+
 			// in the Shopping Cart array, each object will have its own deployment/model options array. 
 			// this will constantly update depending on user product selection
 			updateModelsPerProduct(cartIndex, modelsPerProduct);
 			updateDeploymentOptions(cartIndex, deploymentOptions);
-
-			// update Shopping Cart
-			updateCartProduct(cartIndex, productName);	
-			updateCartDeployment(cartIndex, '');		
-			updateCartModel(cartIndex, '', '');		
 		}
 	}
 
@@ -67,7 +67,7 @@ class SelectProducts extends Component {
 	handleQuantityChange(value, cartIndex) {
 		const {handleQuantity} = this.props;
 
-		if (value.length > 0) {
+		if (value) {
 			const quantityInt = parseInt(value, 10);
 
 			if ((Number.isInteger(quantityInt)) && (quantityInt > -1) && (quantityInt % 1 === 0)) {
@@ -83,17 +83,20 @@ class SelectProducts extends Component {
 	validateQuantity(value, cartIndex) {
 		const {handleQuantity} = this.props;
 
-		if (value === '') {
+		if (value === '' || value === '0') {
 			handleQuantity(cartIndex, 1);
 		}		
 	}
 
+	// force scroll to bottom when user adds a another product
+	addProductRow() {
+		const {addAnotherProduct} = this.props;
+		addAnotherProduct();
+		window.scrollTo(0,document.body.scrollHeight);
+	}
+
 	render() {
-		const {addAnotherProduct, shoppingCart, deploymentKey, productsData, handleQuantity, deleteProduct, setTab} = this.props;
-
-		// get the sum of all (prices * quantity), if nothing has been added yet, return 0.00
-		const totalPrice = (shoppingCart[0].price ? shoppingCart.reduce((sum, item) => (sum + (item.price * item.quantity)), 0) : '0.00');
-
+		const {shoppingCart, deploymentKey, productsData, deleteProduct} = this.props;
 		/**
 		* Everytime user clicks "Add another product" a new product object is pushed into the Shopping Cart array
 		*/		
@@ -112,9 +115,9 @@ class SelectProducts extends Component {
 				quantity={item.quantity}
 				price={item.price}
 				deleteProduct={() => deleteProduct(i)}
-				incQuantity={() => handleQuantity(i, (item.quantity + 1))}
-				decQuantity={() => handleQuantity(i, (item.quantity - 1))}
-				checkQuantity={(e) => this.validateQuantity(e.target.value, i)}
+				checkQuantity={(e) => this.validateQuantity(e.target.value, i)}				
+				incQuantity={() => this.handleQuantityChange((item.quantity + 1), i)}
+				decQuantity={() => this.handleQuantityChange((item.quantity - 1), i)}
 				quantityChange={(e) => this.handleQuantityChange(e.target.value, i)} 
 				selectProduct={(e) => this.handleProductSelect(e, i)}
 				selectDeployment={(e) => this.handleDeploymentSelect(e, i, item.modelsPerProduct)}
@@ -124,18 +127,9 @@ class SelectProducts extends Component {
 		return (
 			<div>
 				{products}
-				<a className="add-product-link" onClick={addAnotherProduct}>
+				<a className="add-product-link" onClick={() => this.addProductRow()}>
 					<h4><Glyphicon glyph="plus-sign" /> Add another product</h4>
 				</a>
-				<hr/>
-				<div className="lower-third">
-					<div>
-						<ControlLabel>Order Total: ${totalPrice}</ControlLabel>
-					</div>
-					<div>
-						<Button bsStyle="primary" onClick={() => setTab('CONTACT_BILLING')}>Next Step: Contact & Billing</Button>
-					</div>
-				</div>
 			</div>);
 	}
 }
@@ -150,7 +144,6 @@ const mapStateToProps = (state) => {
 
 const mapDispatchToProps = (dispatch) => {
 	return {
-		setTab: (tab) => dispatch(setTab(tab)),
 		addAnotherProduct: () => dispatch(addNewProduct()),
 		updateCartProduct: (cartIndex, product) => dispatch(updateCartProduct(cartIndex, product)),
 		updateCartDeployment: (cartIndex, deployment) => dispatch(updateCartDeployment(cartIndex, deployment)),

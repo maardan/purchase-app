@@ -17,10 +17,10 @@ export const fetchData = () => {
 	};
 }; 
 
-export const setTab = (tab) => {
+export const setTab = (tabIndex) => {
 	return {
 		type: 'SET_TAB',
-		tab
+		tabIndex
 	};
 };
 

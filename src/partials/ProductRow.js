@@ -1,13 +1,13 @@
 import React from 'react';
-import {Row, Col, FormGroup, ControlLabel, FormControl, Button, Glyphicon} from 'react-bootstrap';
+import {Row, Col, FormGroup, ControlLabel, FormControl, Button, InputGroup, Glyphicon} from 'react-bootstrap';
 /*
 * A ProductRow is created for each new product added, each has its own selection controls
 */
 const ProductRow = (props) => {
 
 	return (
-		<div>
-			<Row>
+		<div className="fadeIn">
+			<Row className="product-each">
 				<Col xs={12} sm={6} md={6} lg={6}>
 					<ControlLabel>{`${props.cartIndex + 1} Select Your Product`}</ControlLabel>
 					<FormGroup>
@@ -35,26 +35,34 @@ const ProductRow = (props) => {
 					</FormGroup>
 				</Col>
 
-				<Col className="center" xs={4} sm={2} md={2} lg={2}>
+				<Col className="center" xs={6} sm={2} md={2} lg={2}>
 					<ControlLabel>Quantity</ControlLabel>
-					<div className="quantity">
-						<Button bsSize="xsmall" onClick={props.decQuantity} disabled={props.quantity <= 1 ? true : false}>
-							<Glyphicon glyph="minus" />
-						</Button>
-						<FormControl type="number" min="1" className="center" value={props.quantity} onChange={props.quantityChange} onBlur={props.checkQuantity} />
-						<Button bsSize="xsmall" onClick={props.incQuantity}>
-							<Glyphicon glyph="plus" />
-						</Button>
-					</div>
+
+					<FormGroup bsSize="small">
+						<InputGroup>
+							<InputGroup.Button>
+								<Button bsSize="small" onClick={props.decQuantity} disabled={props.quantity <= 1 ? true : false}>
+									<Glyphicon glyph="minus" />
+								</Button>								
+							</InputGroup.Button>
+							<FormControl type="number" min="1" className="center" value={props.quantity} onChange={props.quantityChange} onBlur={props.checkQuantity} />
+							<InputGroup.Button>
+								<Button bsSize="small" onClick={props.incQuantity}>
+									<Glyphicon glyph="plus" />
+								</Button>
+							</InputGroup.Button>
+						</InputGroup>
+					</FormGroup>
+
 				</Col>
 
-				<Col className="center" xs={4} sm={2} md={2} lg={2}>
+				<Col className="center" xs={3} sm={2} md={2} lg={2}>
 					<ControlLabel>Price</ControlLabel>
 					<p>{props.price ? `$${props.price * props.quantity}` : null}</p>
 				</Col>
 
-				<Col className="center" xs={4} sm={2} md={2} lg={2}>
-					{props.cartLength < 2 ? null : <Button bsStyle="danger" onClick={props.deleteProduct}>Delete</Button>}
+				<Col className="center delete-btn" xs={3} sm={2} md={2} lg={2}>
+					{props.cartLength < 2 ? null : <Button bsStyle="danger" bsSize="small" onClick={props.deleteProduct}>Delete</Button>}
 				</Col>
 			</Row>
 			<hr className="dashed-line"/>
