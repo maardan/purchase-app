@@ -1,27 +1,44 @@
 import React from 'react';
-import {Row, Col, Form, FormGroup, ControlLabel, FormControl} from 'react-bootstrap';
+import {Row, Col, FormGroup, ControlLabel, FormControl} from 'react-bootstrap';
 
 const BillingForm = (props) => {
 
 	return (
 		<Row>
-			<Col xs={8} xsOffset={2} sm={4} smOffset={4} md={4} mdOffset={4} lg={4} lgOffset={4}>
-				<Form horizontal>
-					<FormGroup controlId="formHorizontalEmail">
-						<ControlLabel>Full Name</ControlLabel>
-						<FormControl type="text" placeholder="Full Name" />
-					</FormGroup>
+			<Col xs={12} sm={6} smOffset={3} md={4} mdOffset={4} lg={4} lgOffset={4}>
 
-					<FormGroup controlId="formHorizontalPassword">
+				<Col xs={12} sm={12} md={12} lg={12}>
+					<FormGroup>
+						<ControlLabel>Full Name</ControlLabel>
+						<FormControl type="text" placeholder="John Doe" />
+					</FormGroup>
+				</Col>
+
+				<Col xs={12} sm={12} md={12} lg={12}>
+					<FormGroup>
 						<ControlLabel>Credit Card Number</ControlLabel>
 						<FormControl type="number" placeholder="0000-0000-0000-0000" />
 					</FormGroup>
+				</Col>
 
-					<FormGroup controlId="formHorizontalPassword">
+				<Col xs={8} sm={8} md={8} lg={8}>
+					<FormGroup>
 						<ControlLabel>Expiration Date</ControlLabel>
-						<FormControl type="number" placeholder="00-00" />
+						<div className="form-flex">
+							<FormControl type="number" placeholder="MM" />
+							<FormControl type="number" placeholder="DD" />
+						</div>
+
 					</FormGroup>
-				</Form>
+				</Col>
+
+				<Col xs={4} sm={4} md={4} lg={4}>
+					<FormGroup>
+						<ControlLabel>CV Code</ControlLabel>
+						<FormControl type="number" placeholder="123" />	
+					</FormGroup>						
+				</Col>
+
 			</Col>
 		</Row>);
 }

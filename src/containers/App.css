@@ -6,12 +6,6 @@ hr {
 	border: 1px solid grey;
 }
 
-.product-each {
-    box-shadow: 0 14px 28px rgba(0,0,0,0.25), 0 10px 10px rgba(0,0,0,0.22);
-    margin: 8px;
-    padding: 10px;	
-}
-
 .dashed-line {
 	border: 1px dashed lightgrey;
 	width: 90%;
@@ -41,16 +35,14 @@ hr {
 	padding-top: 25px;
 }
 
-/*disable the input spinner*/
-input::-webkit-outer-spin-button,
-input::-webkit-inner-spin-button {
-    /* display: none; <- Crashes Chrome on hover */
-    -webkit-appearance: none;
-    margin: 0; /* <-- Apparently some margin are still there even though it's hidden */
+.form-flex {
+	display: flex;
 }
 
 
-
+/*==================================================
+ * Product row fade-in effect
+ * ===============================================*/
  @-webkit-keyframes fadeIn {
     0% {opacity: 0;}
     100% {opacity: 1;}
@@ -69,11 +61,78 @@ input::-webkit-inner-spin-button {
     -webkit-animation-fill-mode: both;
     animation-fill-mode: both;   
 }
+/*==================================================
+ * ===============================================*/
 
 
 
 
 
+
+
+/*==================================================
+ * Shadow effect
+ * ===============================================*/
+.product-each
+{
+	margin: 0px 0px 20px 0px;
+	padding: 15px;
+	position:relative;
+    position:relative;
+    -webkit-box-shadow:0 1px 4px rgba(0, 0, 0, 0.3), 0 0 40px rgba(0, 0, 0, 0.1) inset;
+    -moz-box-shadow:0 1px 4px rgba(0, 0, 0, 0.3), 0 0 40px rgba(0, 0, 0, 0.1) inset;
+    box-shadow:0 1px 4px rgba(0, 0, 0, 0.3), 0 0 40px rgba(0, 0, 0, 0.1) inset;
+}
+/*==================================================
+ * ===============================================*/
+
+
+
+
+
+
+/*==================================================
+ * Step by step highlight effect
+ * ===============================================*/
+@keyframes highlight {
+ 	0% {
+ 		background: lightblue;
+ 	}
+ 	100% {
+ 		background: none;
+ 	}
+}
+
+#highlight1 {
+	-webkit-animation: highlight 1s; /* Safari 4.0 - 8.0 */
+	animation: highlight 1s;	
+	-webkit-animation-delay: 1s; /* Safari 4.0 - 8.0 */
+	animation-delay: 1s;
+}
+
+#highlight2 {
+    -webkit-animation: highlight 1s; /* Safari 4.0 - 8.0 */
+    animation: highlight 1s;
+    -webkit-animation-delay: 1.5s; /* Safari 4.0 - 8.0 */
+    animation-delay: 1.5s;    
+}
+
+#highlight3 {
+    -webkit-animation: highlight 1s; /* Safari 4.0 - 8.0 */
+    animation: highlight 1s;
+    -webkit-animation-delay: 2s; /* Safari 4.0 - 8.0 */
+    animation-delay: 2s;    
+}
+/*==================================================
+ * ===============================================*/
+
+
+
+
+
+/*==================================================
+ * Arrow banners
+ * ===============================================*/
 .steps {
 	margin: 30px 0px 30px 0px;
 	padding: 0;
@@ -142,3 +201,5 @@ input::-webkit-inner-spin-button {
 /* Hover for completed and current */
 .steps li:hover {background-color: #696}
 .steps li:hover::after {border-left-color: #696}
+/*==================================================
+ * ===============================================*/

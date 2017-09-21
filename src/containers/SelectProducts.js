@@ -92,7 +92,7 @@ class SelectProducts extends Component {
 	addProductRow() {
 		const {addAnotherProduct} = this.props;
 		addAnotherProduct();
-		window.scrollTo(0,document.body.scrollHeight);
+		setTimeout(() => window.scrollTo(0,document.body.scrollHeight), 500);
 	}
 
 	render() {
